@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Montserrat', sans-serif; }
+    a { color: #4A5A2A; text-decoration: none; }
+    a:hover { color: #6E8B3D; }
+  </style>
+</helmet>
+<div style="background:#F7F6F2;min-height:100vh;color:#0B1D33;">
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:50;background:#F7F6F2;border-bottom:2px solid #C9A15A;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ goHome }}">
+      <img src="assets/glp-logo-only.png" alt="Good Life Appraisal" style="height:64px;width:auto;object-fit:contain" />
+    </div>
+    <nav style="display:flex;align-items:center;gap:44px;">
+      <span style="font-weight:600;font-size:13px;letter-spacing:0.08em;cursor:pointer;color:{{ homeColor }};padding-bottom:6px;border-bottom:2px solid {{ homeUnderline }};" onClick="{{ goHome }}">HOME</span>
+      <span style="font-weight:600;font-size:13px;letter-spacing:0.08em;cursor:pointer;color:{{ aboutColor }};padding-bottom:6px;border-bottom:2px solid {{ aboutUnderline }};" onClick="{{ goAbout }}">ABOUT</span>
+      <span style="font-weight:600;font-size:13px;letter-spacing:0.08em;cursor:pointer;color:{{ servicesColor }};padding-bottom:6px;border-bottom:2px solid {{ servicesUnderline }};" onClick="{{ goServices }}">SERVICES</span>
+      <span style="font-weight:600;font-size:13px;letter-spacing:0.08em;cursor:pointer;color:{{ contactColor }};padding-bottom:6px;border-bottom:2px solid {{ contactUnderline }};" onClick="{{ goContact }}">CONTACT</span>
+    </nav>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <main>
+      <section style="background:{{ heroBg }};padding:40px 40px 0;">
+        <div style="max-width:1200px;margin:0 auto;display:flex;gap:32px;justify-content:center;">
+          <sc-for list="{{ founders }}" as="f" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;gap:16px;background:rgba(255,255,255,0.06);padding:18px 26px;border-radius:3px;min-width:340px;">
+              <img src="{{ f.photo }}" alt="{{ f.name }}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0;" />
+              <div>
+                <p style="font-size:16px;font-weight:700;margin:0 0 3px;color:{{ heroTextColor }};">{{ f.name }}</p>
+                <p style="font-size:12px;color:#C9A15A;font-weight:600;letter-spacing:0.03em;margin:0 0 6px;">{{ f.title }}</p>
+                <p style="font-size:13px;margin:0;"><a href="mailto:{{ f.email }}" style="color:{{ heroSubTextColor }};">{{ f.email }}</a></p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background:{{ heroBg }};position:relative;overflow:hidden;padding:56px 40px 80px;display:flex;align-items:center;justify-content:center;min-height:400px;">
+        <div style="max-width:720px;position:relative;z-index:2;text-align:center;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:22px;">
+            <div style="width:44px;height:2px;background:#C9A15A;"></div>
+            <span style="color:#C9A15A;font-weight:600;letter-spacing:0.12em;font-size:13px;">APPRAISAL SERVICES</span>
+            <div style="width:44px;height:2px;background:#C9A15A;"></div>
+          </div>
+          <h1 style="font-size:52px;line-height:1.1;font-weight:700;margin:0 0 22px;color:{{ heroTextColor }};">Real estate valuations rooted in trust.</h1>
+          <p style="font-family:'Great Vibes',cursive;font-size:34px;color:#C9A15A;margin:0 0 24px;">Where Legacy Matters</p>
+          <p style="font-size:17px;line-height:1.7;color:{{ heroSubTextColor }};margin:0 auto 36px;max-width:560px;">Behind every property is more than land, buildings, or a number on a page — it's years of hard work, investment, and often a legacy built across generations. We provide credible, defensible valuations with the respect every assignment deserves.</p>
+          <div style="display:flex;gap:16px;justify-content:center;">
+            <span style="background:#4A5A2A;color:#F7F6F2;padding:15px 28px;font-weight:600;font-size:14px;letter-spacing:0.02em;cursor:pointer;border-radius:3px;" onClick="{{ goContact }}">Request an Appraisal</span>
+            <span style="border:1.5px solid {{ heroTextColor }};color:{{ heroTextColor }};padding:15px 28px;font-weight:600;font-size:14px;letter-spacing:0.02em;cursor:pointer;border-radius:3px;" onClick="{{ goServices }}">Our Services</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:88px 40px;max-width:1200px;margin:0 auto;">
+        <div style="text-align:center;max-width:640px;margin:0 auto 56px;">
+          <span style="color:#4A5A2A;font-weight:600;letter-spacing:0.12em;font-size:13px;">WHAT WE APPRAISE</span>
+          <h2 style="font-size:36px;font-weight:700;margin:14px 0 0;color:#0B1D33;">Four specialties, one standard of care</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ serviceGridCols }};gap:28px;">
+          <sc-for list="{{ services }}" as="svc" hint-placeholder-count="4">
+            <div style="background:#FFFFFF;border-top:3px solid #C9A15A;padding:32px 26px;border-radius:2px;">
+              <span style="font-family:'Great Vibes',cursive;font-size:30px;color:#6E8B3D;">{{ svc.num }}</span>
+              <h3 style="font-size:19px;font-weight:700;margin:10px 0 12px;color:#0B1D33;">{{ svc.title }}</h3>
+              <p style="font-size:14.5px;line-height:1.65;color:#3a4658;margin:0;">{{ svc.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <div style="text-align:center;margin-top:48px;">
+          <span style="color:#4A5A2A;font-weight:600;font-size:14px;cursor:pointer;border-bottom:1.5px solid #4A5A2A;padding-bottom:3px;" onClick="{{ goServices }}">See full service details →</span>
+        </div>
+      </section>
+
+      <section style="background:#0B1D33;padding:64px 40px;text-align:center;">
+        <p style="font-family:'Great Vibes',cursive;font-size:30px;color:#F7F6F2;margin:0 0 10px;">"Your property represents more than value."</p>
+        <p style="font-size:14px;letter-spacing:0.08em;color:#C9A15A;font-weight:600;margin:0;">IT'S "WHERE LEGACY MATTERS"</p>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ============ ABOUT ============ -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+    <main>
+      <section style="background:#E7DCC1;padding:72px 40px 56px;text-align:center;">
+        <span style="color:#4A5A2A;font-weight:600;letter-spacing:0.12em;font-size:13px;">ABOUT US</span>
+        <h1 style="font-size:42px;font-weight:700;margin:14px 0 0;color:#0B1D33;">Every Property Has a Story</h1>
+      </section>
+
+      <section style="max-width:760px;margin:0 auto;padding:64px 40px;">
+        <p style="font-size:17px;line-height:1.8;color:#28324a;margin:0 0 22px;">Behind every property is more than land, buildings, or a number on a page. Every property represents something meaningful – years of hard work, investment, opportunity, and often a legacy built across generations.</p>
+        <p style="font-size:17px;line-height:1.8;color:#28324a;margin:0 0 22px;">At Good Life Appraisal, we believe every valuation carries responsibility. Our role is not simply to determine value, but to provide the confidence and clarity our clients need when important decisions are being made.</p>
+        <p style="font-size:17px;line-height:1.8;color:#28324a;margin:0;">We provide credible, defensible real estate valuations through careful analysis, market expertise, and professional judgment. Whether supporting a lending decision, estate plan, business transaction, or personal milestone, we approach every assignment with the respect and attention it deserves.</p>
+      </section>
+
+      <section style="background:#F7F6F2;padding:64px 40px;">
+        <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+          <div style="background:#FFFFFF;padding:36px 32px;border-radius:2px;border-top:3px solid #6E8B3D;">
+            <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#0B1D33;">Our Mission</h3>
+            <p style="font-size:15.5px;line-height:1.75;color:#3a4658;margin:0;">We believe every property has a story, every valuation carries responsibility, and every client deserves excellence. Our mission is to provide credible, defensible appraisals with exceptional professionalism while creating a legacy of trust.</p>
+          </div>
+          <div style="background:#FFFFFF;padding:36px 32px;border-radius:2px;border-top:3px solid #C9A15A;">
+            <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#0B1D33;">Our Promise</h3>
+            <p style="font-size:15.5px;line-height:1.75;color:#3a4658;margin:0;">At Good Life Appraisal, your property represents more than value. It's "Where Legacy Matters" — a reminder that every appraisal we complete becomes part of a legacy defined by integrity and trust.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:80px 40px;max-width:1040px;margin:0 auto;">
+        <div style="text-align:center;max-width:600px;margin:0 auto 52px;">
+          <span style="color:#4A5A2A;font-weight:600;letter-spacing:0.12em;font-size:13px;">THE TEAM</span>
+          <h2 style="font-size:34px;font-weight:700;margin:14px 0 0;color:#0B1D33;">Meet the Founders</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+          <sc-for list="{{ founders }}" as="f" hint-placeholder-count="2">
+            <div style="background:#FFFFFF;padding:36px 30px;border-radius:2px;text-align:center;">
+              <img src="{{ f.photo }}" alt="{{ f.name }}" style="width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;" />
+              <h3 style="font-size:19px;font-weight:700;margin:0 0 4px;color:#0B1D33;">{{ f.name }}</h3>
+              <p style="font-size:13px;color:#C9A15A;font-weight:600;letter-spacing:0.03em;margin:0 0 6px;">{{ f.title }}</p>
+              <p style="font-size:13px;margin:0 0 14px;"><a href="mailto:{{ f.email }}" style="color:#4A5A2A;">{{ f.email }}</a></p>
+              <p style="font-size:14.5px;line-height:1.6;color:#3a4658;margin:0;">{{ f.teaser }}</p>
+              <sc-if value="{{ showFounderQuotes }}" hint-placeholder-val="{{ true }}">
+                <p style="font-family:'Great Vibes',cursive;font-size:19px;color:#6E8B3D;margin:18px 0 0;">"{{ f.quote }}"</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ============ SERVICES ============ -->
+  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+    <main>
+      <section style="background:#0B1D33;padding:72px 40px 56px;text-align:center;">
+        <span style="color:#C9A15A;font-weight:600;letter-spacing:0.12em;font-size:13px;">WHAT WE DO</span>
+        <h1 style="font-size:42px;font-weight:700;margin:14px 0 0;color:#F7F6F2;">Appraisal Services</h1>
+        <p style="font-size:16px;color:#cfd4de;max-width:560px;margin:16px auto 0;line-height:1.7;">Credible, well-supported valuations across four specialties — for lenders, attorneys, landowners, businesses, and families.</p>
+      </section>
+
+      <section style="max-width:960px;margin:0 auto;padding:72px 40px;display:flex;flex-direction:column;gap:28px;">
+        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="4">
+          <div style="display:flex;gap:32px;align-items:flex-start;background:#FFFFFF;padding:34px 32px;border-radius:2px;border-left:4px solid #6E8B3D;">
+            <span style="font-family:'Great Vibes',cursive;font-size:44px;color:#C9A15A;min-width:64px;">{{ svc.num }}</span>
+            <div>
+              <h3 style="font-size:22px;font-weight:700;margin:0 0 10px;color:#0B1D33;">{{ svc.title }}</h3>
+              <p style="font-size:15.5px;line-height:1.75;color:#3a4658;margin:0;">{{ svc.longDesc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <section style="background:#E7DCC1;padding:56px 40px;text-align:center;">
+        <p style="font-size:15px;font-weight:600;letter-spacing:0.05em;color:#0B1D33;margin:0 0 22px;">SERVING NEBRASKA, KANSAS, IOWA &amp; SOUTH DAKOTA</p>
+        <span style="background:#4A5A2A;color:#F7F6F2;padding:15px 30px;font-weight:600;font-size:14px;cursor:pointer;border-radius:3px;" onClick="{{ goContact }}">Request an Appraisal</span>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ============ CONTACT ============ -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+    <main>
+      <section style="background:#E7DCC1;padding:72px 40px 56px;text-align:center;">
+        <span style="color:#4A5A2A;font-weight:600;letter-spacing:0.12em;font-size:13px;">GET IN TOUCH</span>
+        <h1 style="font-size:42px;font-weight:700;margin:14px 0 0;color:#0B1D33;">Request an Appraisal</h1>
+      </section>
+
+      <section style="max-width:1040px;margin:0 auto;padding:72px 40px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;">
+        <sc-if value="{{ formSubmitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FFFFFF;padding:48px 40px;border-radius:2px;border-top:3px solid #6E8B3D;text-align:center;">
+            <h3 style="font-size:22px;font-weight:700;margin:0 0 12px;color:#0B1D33;">Thank you.</h3>
+            <p style="font-size:15px;line-height:1.7;color:#3a4658;margin:0;">We've received your request and will be in touch soon.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ formNotSubmitted }}" hint-placeholder-val="{{ true }}">
+          <form style="background:#FFFFFF;padding:40px 36px;border-radius:2px;display:flex;flex-direction:column;gap:18px;" onSubmit="{{ submitForm }}">
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#0B1D33;display:block;margin-bottom:6px;">Full Name</label>
+              <input type="text" required="{{ true }}" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #E7DCC1;border-radius:3px;font-size:14px;font-family:inherit;" />
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div>
+                <label style="font-size:13px;font-weight:600;color:#0B1D33;display:block;margin-bottom:6px;">Email</label>
+                <input type="email" required="{{ true }}" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #E7DCC1;border-radius:3px;font-size:14px;font-family:inherit;" />
+              </div>
+              <div>
+                <label style="font-size:13px;font-weight:600;color:#0B1D33;display:block;margin-bottom:6px;">Phone</label>
+                <input type="tel" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #E7DCC1;border-radius:3px;font-size:14px;font-family:inherit;" />
+              </div>
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#0B1D33;display:block;margin-bottom:6px;">Property Type</label>
+              <select style="width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #E7DCC1;border-radius:3px;font-size:14px;font-family:inherit;background:#fff;">
+                <option>Agricultural</option>
+                <option>Recreational</option>
+                <option>Residential</option>
+                <option>Commercial</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#0B1D33;display:block;margin-bottom:6px;">Message</label>
+              <textarea rows="4" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #E7DCC1;border-radius:3px;font-size:14px;font-family:inherit;resize:vertical;"></textarea>
+            </div>
+            <button type="submit" style="background:#4A5A2A;color:#F7F6F2;padding:15px 28px;font-weight:600;font-size:14px;border:none;border-radius:3px;cursor:pointer;margin-top:6px;">Send Request</button>
+          </form>
+        </sc-if>
+
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <div>
+            <h4 style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#4A5A2A;margin:0 0 8px;">EMAIL</h4>
+            <p style="font-size:15.5px;color:#0B1D33;margin:0;">hello@goodlifeappraisal.com</p>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#4A5A2A;margin:0 0 8px;">PHONE</h4>
+            <p style="font-size:15.5px;color:#0B1D33;margin:0;">(402) 555-0142</p>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#4A5A2A;margin:0 0 8px;">SERVICE AREA</h4>
+            <p style="font-size:15.5px;color:#0B1D33;margin:0;line-height:1.6;">Nebraska, Kansas, Iowa &amp; South Dakota</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <footer style="background:#0B1D33;padding:56px 40px 28px;">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:36px;border-bottom:1px solid #24304a;">
+      <div>
+        <p style="font-family:'Great Vibes',cursive;font-size:28px;color:#F7F6F2;margin:0 0 8px;">Good Life Appraisal</p>
+        <p style="font-size:13px;color:#8f9ab3;letter-spacing:0.05em;margin:0 0 14px;">AGRICULTURE · RECREATIONAL · RESIDENTIAL · COMMERCIAL</p>
+        <p style="font-size:14px;color:#a9b2c6;line-height:1.7;margin:0;max-width:340px;">Credible, defensible real estate valuations — where legacy matters.</p>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#C9A15A;margin:0 0 16px;">QUICK LINKS</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <span style="font-size:14px;color:#dfe3ec;cursor:pointer;" onClick="{{ goHome }}">Home</span>
+          <span style="font-size:14px;color:#dfe3ec;cursor:pointer;" onClick="{{ goAbout }}">About</span>
+          <span style="font-size:14px;color:#dfe3ec;cursor:pointer;" onClick="{{ goServices }}">Services</span>
+          <span style="font-size:14px;color:#dfe3ec;cursor:pointer;" onClick="{{ goContact }}">Contact</span>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#C9A15A;margin:0 0 16px;">CONTACT</h4>
+        <p style="font-size:14px;color:#dfe3ec;margin:0 0 8px;">hello@goodlifeappraisal.com</p>
+        <p style="font-size:14px;color:#dfe3ec;margin:0 0 8px;">(402) 555-0142</p>
+        <p style="font-size:14px;color:#dfe3ec;margin:0;">Nebraska · Kansas · Iowa · South Dakota</p>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:#6b7592;margin:24px 0 0;">© 2026 Good Life Appraisal. All rights reserved.</p>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;navy&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;tan&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Home hero&quot;},&quot;servicesLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;grid&quot;,&quot;options&quot;:[&quot;grid&quot;,&quot;stacked&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Home services&quot;},&quot;showFounderQuotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;About page&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'home', formSubmitted: false };
+
+  services = [
+    { num: '01', title: 'Agricultural', desc: 'Row-crop farmland, pasture, and working operations valued for lending, estate planning, and transactions.', longDesc: 'From row-crop farmland to pasture, hobby farms, and working agricultural operations, we deliver credible valuations for lending decisions, estate planning, and property transactions. Our experience spans acreages to full farm operations across the region.' },
+    { num: '02', title: 'Recreational', desc: 'Hunting ground, timberland, and recreational acreages valued for what they offer today and tomorrow.', longDesc: 'Hunting ground, timberland, and recreational acreages require a specialized eye. We value recreational land for its current use and its long-term potential, giving landowners and buyers a clear, defensible picture of worth.' },
+    { num: '03', title: 'Residential', desc: 'Acreages, hobby farms, and rural homes appraised with an eye for what makes each property unique.', longDesc: 'Acreages, hobby farms, and rural homes each come with characteristics that set them apart from typical suburban listings. We provide accurate, well-supported residential appraisals across rural and small-town markets.' },
+    { num: '04', title: 'Commercial', desc: 'Small business properties to larger commercial holdings, appraised with the same rigor as any assignment.', longDesc: 'From small business properties to larger commercial holdings, we bring the same market expertise, careful analysis, and professional judgment to every commercial assignment — supporting attorneys, lenders, and business owners alike.' },
+  ];
+
+  founders = [
+    { initials: 'EL', name: 'Emma Loseke', title: 'CO-FOUNDER · CERTIFIED GENERAL APPRAISER', email: 'emma@goodlifeappraisal.com', photo: 'assets/emma-headshot.png', teaser: 'Specializing in rural residential and agricultural real estate across Nebraska, with 4+ years of appraisal experience.', quote: 'Where Legacy Matters is a reminder that every appraisal becomes part of the legacy we\u2019re building.' },
+    { initials: 'CN', name: 'Chase Nelms', title: 'CO-FOUNDER · CERTIFIED GENERAL APPRAISER', email: 'chase@goodlifeappraisal.com', photo: 'assets/chase-headshot.jpeg', teaser: 'Bringing 10+ years across agricultural, recreational, residential, and commercial appraisal in four states.', quote: 'My responsibility is to provide service that clients can trust today and be confident in tomorrow.' },
+  ];
+
+  renderVals() {
+    const page = this.state.page;
+    const go = (p) => () => this.setState({ page: p });
+    const activeColor = (p) => page === p ? '#4A5A2A' : '#0B1D33';
+    return {
+      isHome: page === 'home',
+      isAbout: page === 'about',
+      isServices: page === 'services',
+      isContact: page === 'contact',
+      goHome: go('home'), goAbout: go('about'), goServices: go('services'), goContact: go('contact'),
+      homeColor: activeColor('home'), aboutColor: activeColor('about'), servicesColor: activeColor('services'), contactColor: activeColor('contact'),
+      homeUnderline: page === 'home' ? '#C9A15A' : 'transparent',
+      aboutUnderline: page === 'about' ? '#C9A15A' : 'transparent',
+      servicesUnderline: page === 'services' ? '#C9A15A' : 'transparent',
+      contactUnderline: page === 'contact' ? '#C9A15A' : 'transparent',
+      services: this.services,
+      founders: this.founders,
+      showFounderQuotes: this.props.showFounderQuotes ?? true,
+      serviceGridCols: (this.props.servicesLayout ?? 'grid') === 'grid' ? 'repeat(4, 1fr)' : '1fr',
+      heroBg: (this.props.heroStyle ?? 'navy') === 'navy' ? '#0B1D33' : '#E7DCC1',
+      heroTextColor: (this.props.heroStyle ?? 'navy') === 'navy' ? '#F7F6F2' : '#0B1D33',
+      heroSubTextColor: (this.props.heroStyle ?? 'navy') === 'navy' ? '#cfd4de' : '#3a4658',
+      formSubmitted: this.state.formSubmitted,
+      formNotSubmitted: !this.state.formSubmitted,
+      submitForm: (e) => { e.preventDefault(); this.setState({ formSubmitted: true }); },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
