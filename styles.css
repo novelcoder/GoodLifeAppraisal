@@ -207,15 +207,20 @@ h1, h2, h3 {
 
 /* ---------- HERO (home) ---------- */
 .hero {
-  background: #fff;
-  padding: 64px 0 72px;
+  background-color: #fff;
+  background-image: var(--hero-bg);
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  padding: 100px 0 120px;
 }
 
 .hero .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: center;
+  display: block;
+}
+
+.hero-copy {
+  max-width: 520px;
 }
 
 .hero h1 {
@@ -241,16 +246,6 @@ h1, h2, h3 {
 }
 
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-
-.hero-art {
-  position: relative;
-  background: linear-gradient(180deg, #fdf6e8 0%, #f3e4c4 100%);
-  border-radius: 6px;
-  overflow: hidden;
-  padding: 24px;
-}
-
-.hero-art img { width: 100%; height: auto; }
 
 /* ---------- Story / valuation navy section ---------- */
 .story-section {
@@ -738,8 +733,12 @@ h1, h2, h3 {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .hero .container { grid-template-columns: 1fr; }
-  .hero-art { order: -1; }
+  .hero {
+    background-image: linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.96)), var(--hero-bg);
+    background-position: center 30%;
+    padding: 56px 0 60px;
+  }
+  .hero-copy { max-width: 100%; }
   .story-grid { grid-template-columns: 1fr; }
   .story-grid .divider-col { display: none; }
   .appraise-grid { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
