@@ -297,12 +297,14 @@ h1, h2, h3 {
 .where-location {
   margin-top: 18px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 600;
   color: var(--gold-light);
   font-size: 1.05rem;
+  text-align: center;
 }
 
 .where-band .sub {
@@ -404,18 +406,22 @@ h1, h2, h3 {
   gap: 16px;
   font-size: 1.15rem;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .wwd-col .icon-circle {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1px solid var(--gold);
+  border: 1px solid #6e8b3d;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.wwd-col ul {
+  margin-left: 68px;
 }
 
 .wwd-col ul li {
@@ -432,7 +438,7 @@ h1, h2, h3 {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--gold);
+  background: #6e8b3d;
 }
 
 /* ---------- Good Life Standard ---------- */
@@ -483,15 +489,17 @@ h1, h2, h3 {
 
 .map-section .container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 40px;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
 .map-copy h3 {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -505,8 +513,6 @@ h1, h2, h3 {
 }
 
 .map-copy p.sub { margin: 0; font-size: 0.9rem; }
-
-.map-graphic { flex-shrink: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -727,8 +733,6 @@ h1, h2, h3 {
   .wwd-grid .divider-col { display: none; }
   .standard-grid { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
   .standard-card { border-left: none; }
-  .map-section .container { flex-direction: column; text-align: center; }
-  .map-copy h3 { justify-content: center; }
 }
 
 @media (max-width: 768px) {
