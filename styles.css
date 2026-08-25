@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
   --navy: #0b2145;
@@ -13,8 +13,7 @@
   --border-light: #e5e0d5;
 
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-script: 'Great Vibes', cursive;
-  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -587,11 +586,11 @@ h1, h2, h3 {
 }
 
 .contact-header .tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
   color: var(--gold-light);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
   margin: 0 0 12px;
 }
 
