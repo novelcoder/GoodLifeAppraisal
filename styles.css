@@ -44,34 +44,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Logo */
 .logo {
   display: flex;
-  flex-direction: column;
   align-items: center;
   line-height: 1;
 }
 
-.logo-script {
-  font-family: var(--font-script);
-  font-size: 2.6rem;
-  color: var(--navy);
-}
-
-.logo-sub {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: -4px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  color: var(--navy);
-}
-
-.logo-sub::before,
-.logo-sub::after {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: var(--gold);
+.logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
 }
 
 /* Header */
