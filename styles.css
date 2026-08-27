@@ -5,7 +5,7 @@
   --navy-deep: #071730;
   --gold: #c9822a;
   --gold-light: #e0ab6c;
-  --cream: #f8f6f1;
+  --cream: #F7F6F2;
   --text-navy: #0b1d33;
   --text-body: #4a5568;
   --text-on-navy: #d7dbe6;
@@ -209,13 +209,19 @@ h1, h2, h3 {
 }
 
 .hero-divider {
-  display: flex;
-  align-items: center;
-  gap: 16px;
   margin: 22px 0;
 }
-.hero-divider .line { height: 1px; flex: 1; max-width: 90px; background: var(--gold-light); }
-.hero-divider svg { flex-shrink: 0; }
+/* The artwork carries its own rules and centre motif, so no flex lines here.
+   It ships with transparent padding (38px sides, 112 top / 185 bottom of a
+   2172x724 canvas); the negative bottom margin absorbs the uneven bottom gap. */
+.hero-divider img {
+  display: block;
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  margin-left: -5px;
+  margin-bottom: -10px;
+}
 
 .hero p.lede {
   font-size: 1.05rem;
@@ -237,6 +243,14 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   gap: 48px;
+}
+
+/* Shared by .story-col and .wwd-col: each column stays a true 50%, but its
+   content block shrinks to fit and is centered, so short content splits its
+   slack evenly on both sides instead of trailing off to the right. */
+.col-inner {
+  width: fit-content;
+  margin-inline: auto;
 }
 
 .story-grid .divider-col { background: rgba(255,255,255,0.15); }
@@ -306,15 +320,13 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.where-band .sub {
-  margin-top: 6px;
-  color: var(--text-muted-on-navy);
-  font-size: 0.9rem;
-}
-
 /* ---------- Page hero band (Services / generic) ---------- */
+/* Grain is an inline SVG (feTurbulence) so it costs no request and no asset. */
 .page-hero {
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23grain)' opacity='0.14'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  background-repeat: repeat;
   padding: 72px 0;
   text-align: center;
 }
@@ -511,8 +523,6 @@ h1, h2, h3 {
   margin: 0 0 6px;
 }
 
-.map-copy p.sub { margin: 0; font-size: 0.9rem; }
-
 /* ---------- Footer ---------- */
 .site-footer {
   background: var(--cream);
@@ -585,12 +595,14 @@ h1, h2, h3 {
   margin: 20px auto 24px;
 }
 
+/* Supporting copy, not a display line: sans keeps it from competing with the
+   Playfair h1 directly above it, which shares the serif family. */
 .contact-header .tagline {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   color: var(--gold-light);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
   margin: 0 0 12px;
 }
 
@@ -730,6 +742,8 @@ h1, h2, h3 {
   .appraise-card { border-left: none; }
   .wwd-grid { grid-template-columns: 1fr; }
   .wwd-grid .divider-col { display: none; }
+  /* Single column now: let content go flush-left instead of centering. */
+  .col-inner { width: auto; }
   .standard-grid { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
   .standard-card { border-left: none; }
 }
